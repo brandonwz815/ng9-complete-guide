@@ -9,8 +9,4 @@ export class AppComponent {
   // title = 'ng9-complete-guide';
   loadedFeature = 'recipe';
 
-  onNavigate(feature: string) {
-    this.loadedFeature = feature;
-  }
-
 }
