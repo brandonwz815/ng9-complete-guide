@@ -8,7 +8,7 @@
                         type="text" 
                         id="name" 
                         class="form-control"
-                        ngModel name="name">
+                        ngModel name="name" required>
                 </div>
                 <div class="col-sm-2 form-group">
                     <label for="amount">Amount</label>
@@ -16,14 +16,16 @@
                         type="text" 
                         id="amount" 
                         class="form-control"
-                        ngModel name="amount">
+                        ngModel name="amount" required [pattern]="'^[1-9][0-9]*$'">
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12">
-                    <button class="btn btn-success" type="submit" (click)="onAddItem()">Add</button>
-                    <button class="btn btn-danger" type="submit">Delete</button>
-                    <button class="btn btn-primary" type="submit">Clear</button>
+                    <button class="btn btn-success" type="submit" 
+                        [disabled]="!f.valid"
+                        >Add</button>
+                    <button class="btn btn-danger" type="button">Delete</button>
+                    <button class="btn btn-primary" type="button">Clear</button>
                 </div>
             </div>
         </form>
