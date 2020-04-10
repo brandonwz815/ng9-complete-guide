@@ -10,6 +10,7 @@ import { ShoppingListService } from '../shopping-list/shopping-list.service';
 
 )
 export class RecipeService {
+
     recipesChanged = new Subject<Recipe[]>();
 
     private recipes: Recipe[] = [
@@ -53,6 +54,11 @@ export class RecipeService {
     updateRecipe(index: number, newRecipe: Recipe) {
         this.recipes[index] = newRecipe;
         this.recipesChanged.next(this.recipes.slice());
+    }
+
+    deleteRecipe(id: number) {
+      this.recipes.splice(id, 1);
+      this.recipesChanged.next(this.recipes.slice())
     }
 
 }
