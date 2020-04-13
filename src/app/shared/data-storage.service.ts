@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { RecipeService } from '../recipes/recipe.service';
 import { Subject } from 'rxjs';
+import { Recipe } from '../recipes/recipe.model';
 
 @Injectable({ providedIn: 'root' })
 export class DataStorageService {
@@ -19,5 +20,14 @@ export class DataStorageService {
         ).subscribe(responseData => {
             console.log(responseData)
         });
+    }
+
+    fetchRecipes() {
+        this.http.get<Recipe[]>(
+            'https://ng9-course-recipe-book.firebaseio.com/recipes.json'
+        )
+        .subscribe(recipes => {
+            this.recipeService.setRecipes(recipes);
+        })
     }
 }
