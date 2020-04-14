@@ -6,9 +6,7 @@ import { Recipe } from './recipe.model';
 import { Ingredient } from '../shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
 
-@Injectable(
-
-)
+@Injectable()
 export class RecipeService {
 
     recipesChanged = new Subject<Recipe[]>();
@@ -31,7 +29,7 @@ export class RecipeService {
     //             new Ingredient('Meat', 1)
     //         ]),
     // ];
-    private recipes: Recipe[];
+    private recipes: Recipe[] = [];
 
     constructor(private shoppingListService: ShoppingListService) {}
 
