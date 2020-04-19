@@ -5,6 +5,7 @@ import { ShoppingListComponent } from './shopping-list.component';
 import { ShoppingEditComponent } from './shopping-edit/shopping-edit.component';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
+import { LoggingService } from '../logging.service';
 
 @NgModule({
     declarations: [
@@ -21,6 +22,7 @@ import { SharedModule } from '../shared/shared.module';
     exports: [
         ShoppingListComponent,
         ShoppingEditComponent,
-    ]
+    ],
+    // providers: [LoggingService]
 })
 export class ShoppingListModule { }
