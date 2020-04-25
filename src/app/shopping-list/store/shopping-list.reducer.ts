@@ -38,6 +38,18 @@ export function shoppingListReducer(state: State = initialState, action: Shoppin
             return {...state, ingredients: state.ingredients.filter((ingredient, index)=>{
                 return index !== action.payload;
             })};
+        case ShoppingListActions.START_EDIT:
+            return {
+                ...state,
+                editedIngredient: { ...state.ingredients[action.payload]},
+                editedIngredientIndex: action.payload
+            }
+        case ShoppingListActions.STOP_EDIT:
+            return {
+                ...state,
+                editedIngredient: null,
+                editedIngredientIndex: -1
+            }
         default:
             return state;
     }

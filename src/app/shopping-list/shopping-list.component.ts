@@ -6,6 +6,7 @@ import { ShoppingListService } from './shopping-list.service';
 import { Ingredient } from '../shared/ingredient.model';
 import { LoggingService } from '../logging.service';
 import * as fromShoppingList from './store/shopping-list.reducer'
+import * as ShoppinglistActions from './store/shopping-list.actions';
 
 @Component({
   selector: 'app-shopping-list',
@@ -35,7 +36,8 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
     // this.subscription.unsubscribe()
   }
 
-  onEditItem(i: number) {
-    this.shoppingListService.startedEditing.next(i);
+  onEditItem(index: number) {
+    // this.shoppingListService.startedEditing.next(i);
+    this.store.dispatch(new ShoppinglistActions.StartEdit(index));
   }
 }
