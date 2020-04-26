@@ -23,7 +23,10 @@ export function authReducer(state = initialState, action: AuthActions.AuthAction
                 )
             };
         case AuthActions.LOGOUT:
-            return initialState;
+            return {
+                ...state,
+                user: null
+            }
         default:
             return state;
     }
