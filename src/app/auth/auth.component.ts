@@ -19,13 +19,13 @@ export class AuthComponent implements OnInit, OnDestroy {
     isLoginMode = true;
     isLoading = false;
     error: string = null;
-    @ViewChild(PlaceholderDirective, {static: false}) alertHost: PlaceholderDirective;
+    @ViewChild(PlaceholderDirective, { static: false }) alertHost: PlaceholderDirective;
     private closeSub: Subscription;
 
-    constructor(private authService: AuthService, 
-                private router: Router, 
-                private componentFactoryResolver: ComponentFactoryResolver,
-                private store: Store<fromApp.AppState>) { }
+    constructor(private authService: AuthService,
+        private router: Router,
+        private componentFactoryResolver: ComponentFactoryResolver,
+        private store: Store<fromApp.AppState>) { }
 
     onSwitchMode() {
         this.isLoginMode = !this.isLoginMode;
@@ -35,18 +35,21 @@ export class AuthComponent implements OnInit, OnDestroy {
         if (form.valid) {
             const email = form.value.email;
             const password = form.value.password;
-            let authObj: Observable<AuthResponseData>;
+            // let authObj: Observable<AuthResponseData>;
 
             this.isLoading = true;
             if (this.isLoginMode) {
                 // authObj = this.authService.login(email, password);
                 this.store.dispatch(
-                    new AuthActions.LoginStart({email, password})
+                    new AuthActions.LoginStart({ email, password })
                 );
             } else {
-                authObj = this.authService.signup(email, password);
+                // authObj = this.authService.signup(email, password);
+                this.store.dispatch(
+                    new AuthActions.SignupStart({ email: email, password: password })
+                );
             }
-            
+
 
             // authObj.subscribe(resData => {
             //     console.log(resData);
@@ -57,7 +60,7 @@ export class AuthComponent implements OnInit, OnDestroy {
             //     this.error = errorMessage;
             //     this.showErrorAlert(errorMessage);
             //     this.isLoading = false;
-            
+
             // });
             form.reset();
             return;
@@ -73,14 +76,14 @@ export class AuthComponent implements OnInit, OnDestroy {
         this.store.select('auth').subscribe(authState => {
             this.isLoading = authState.loading;
             this.error = authState.authError;
-            if(this.error) {
+            if (this.error) {
                 this.showErrorAlert(this.error);
             }
         });
     }
 
     ngOnDestroy() {
-        if(this.closeSub) {
+        if (this.closeSub) {
             this.closeSub.unsubscribe();
         }
     }
