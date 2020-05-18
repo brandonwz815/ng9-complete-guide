@@ -4,19 +4,8 @@ import { Store } from '@ngrx/store';
 import * as fromApp from '../store/app.reducer';
 import * as AuthActions from './store/auth.actions';
 
-export interface AuthResponseData {
-    kind: string,
-    idToken: string,
-    email: string,
-    refreshToken: string,
-    expiresIn: string,
-    localId: string,
-    registered?: boolean
-}
-
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-
     private tokenExpirationTimer: any;
 
     constructor(public store: Store<fromApp.AppState>) { }
